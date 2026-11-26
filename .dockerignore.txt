@@ -1,0 +1,13 @@
+# .dockerignore
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.git/
+uploads/
+# Если есть папки с данными или весами моделей, добавь их:
+data/
+datasets/
+weights/
+*.zip
