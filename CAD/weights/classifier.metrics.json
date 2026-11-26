@@ -1,0 +1,103 @@
+{
+  "best_epoch": 9,
+  "val": {
+    "samples": 8,
+    "classes": [
+      "coating_damage",
+      "mechanical_damage",
+      "normal"
+    ],
+    "confusion_matrix": [
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        3
+      ]
+    ],
+    "by_class": {
+      "coating_damage": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "mechanical_damage": {
+        "support": 3,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "f1": 0.8
+      },
+      "normal": {
+        "support": 3,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.8571428571428571
+      }
+    },
+    "macro_f1": 0.8857142857142857,
+    "accuracy": 0.875,
+    "threshold": 0.820516049861908,
+    "accepted": 7,
+    "correct_accepted": 7
+  },
+  "test": {
+    "samples": 10,
+    "classes": [
+      "coating_damage",
+      "mechanical_damage",
+      "normal"
+    ],
+    "confusion_matrix": [
+      [
+        2,
+        1,
+        1
+      ],
+      [
+        0,
+        3,
+        1
+      ],
+      [
+        0,
+        1,
+        1
+      ]
+    ],
+    "by_class": {
+      "coating_damage": {
+        "support": 4,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      "mechanical_damage": {
+        "support": 4,
+        "precision": 0.6,
+        "recall": 0.75,
+        "f1": 0.6666666666666666
+      },
+      "normal": {
+        "support": 2,
+        "precision": 0.3333333333333333,
+        "recall": 0.5,
+        "f1": 0.4
+      }
+    },
+    "macro_f1": 0.5777777777777778,
+    "accuracy": 0.6,
+    "threshold": 0.820516049861908,
+    "accepted": 7,
+    "correct_accepted": 4
+  }
+}

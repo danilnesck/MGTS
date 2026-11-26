@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fcf9fa">
+  <title>Контур • Проверка инфраструктуры</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./" aria-label="Контур, новая проверка">
+        <span class="brand-mark" aria-hidden="true"><i></i></span>
+        <span><strong>Контур</strong><small>Инспекция инфраструктуры</small></span>
+      </a>
+      <nav class="nav" aria-label="Разделы">
+        <button type="button" id="check-tab" class="nav-tab active" aria-pressed="true">Проверка</button>
+        <button type="button" id="history-tab" class="nav-tab" aria-pressed="false">Журнал</button>
+      </nav>
+      <a class="button button-outline export" href="/api/v1/report/csv" download>
+        <span aria-hidden="true">↓</span> Экспорт CSV
+      </a>
+    </div>
+  </header>
+  <main class="shell">
+    <section id="check-panel" aria-labelledby="check-title">
+      <div class="intro">
+        <div>
+          <h1 id="check-title">Проверка инфраструктуры</h1>
+          <p>Загрузите фото, чтобы найти оборудование связи и оценить его состояние.</p>
+        </div>
+        <button type="button" class="button button-outline" id="sample-button">Открыть демо-кадр</button>
+      </div>
+      <div class="workspace">
+        <section class="panel image-panel" aria-labelledby="frame-title">
+          <div class="panel-top">
+            <div>
+              <h2 id="frame-title">Кадр осмотра</h2>
+              <span id="photo-name" class="muted file-name">Загрузка примера…</span>
+            </div>
+            <div class="image-switch" aria-label="Режим просмотра">
+              <button type="button" id="original-button" aria-pressed="true">Исходник</button>
+              <button type="button" id="annotated-button" aria-pressed="false" disabled>С разметкой</button>
+            </div>
+          </div>
+          <div class="stage" id="stage">
+            <div class="stage-image" id="stage-image" hidden>
+              <img id="preview" alt="Кадр оборудования связи">
+              <div id="overlay" class="overlay" aria-hidden="true"></div>
+            </div>
+            <p id="no-photo" class="no-photo">Выберите фотографию</p>
+          </div>
+          <div class="panel-bottom">
+            <div id="upload-options" class="file-actions">
+              <button type="button" class="button button-outline" id="choose-button"><span aria-hidden="true">↑</span> Выбрать фото</button>
+              <input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+              <span class="muted file-hint">JPG, PNG, WEBP · до 10 МБ</span>
+            </div>
+            <a id="processed-link" class="text-button" target="_blank" rel="noopener" hidden>Открыть фото с рамками ↗</a>
+          </div>
+        </section>
+        <section class="panel analysis-panel" aria-labelledby="analysis-title" aria-busy="false">
+          <div class="analysis-top">
+            <div>
+              <h2 id="analysis-title">Результат проверки</h2>
+              <p id="inspection-meta" class="muted">Фото готово к анализу</p>
+            </div>
+            <span id="analysis-badge" class="badge neutral">Ожидание</span>
+          </div>
+          <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+          <div id="empty-result" class="empty-result">
+            <div class="scan-icon" aria-hidden="true"><i></i></div>
+            <strong id="empty-title">Готово к запуску</strong>
+            <p id="empty-text">Здесь появятся найденные объекты и их состояния.</p>
+          </div>
+          <div id="summary" class="summary" hidden>
+            <div><span id="count-all">0</span><small>Найдено</small></div>
+            <div><span id="count-defects">0</span><small>С дефектом</small></div>
+            <div><span id="count-review">0</span><small>На проверку</small></div>
+          </div>
+          <div id="object-list" class="object-list"></div>
+          <div class="analysis-footer">
+            <button type="button" class="button button-primary" id="analyze-button" disabled>
+              <span class="spinner" aria-hidden="true" hidden></span><span id="analyze-label">Проанализировать кадр</span>
+              <span class="forward" aria-hidden="true">→</span>
+            </button>
+            <p id="analysis-note" class="muted">Тип оборудования и состояние определяются по фото.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section id="history-panel" aria-labelledby="history-title" hidden>
+      <div class="intro">
+        <div><h1 id="history-title">Журнал проверок</h1><p>Здесь сохраняются результаты анализа загруженных кадров.</p></div>
+        <button type="button" class="button button-primary" id="new-check">Перейти к проверке →</button>
+      </div>
+      <div class="panel history-panel">
+        <p id="history-message" role="status"></p>
+        <div id="history-table-wrap" class="history-table-wrap" hidden>
+          <table>
+            <thead><tr><th scope="col">Кадр</th><th scope="col">Дата проверки</th><th scope="col">Объекты</th><th scope="col">Требуют внимания</th><th scope="col"><span class="sr-only">Действие</span></th></tr></thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <footer class="page-footer"><span>Контур · прототип для трека «Сетевая инфраструктура и сервис»</span><a href="/docs">API ↗</a></footer>
+  </main>
+</body>
+</html>

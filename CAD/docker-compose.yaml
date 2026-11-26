@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: mts_user
+      POSTGRES_PASSWORD: mts_password
+      POSTGRES_DB: mts_hackathon
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "mts_user", "-d", "mts_hackathon"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # ВАЖНО: Внутри Docker-сети мы обращаемся к базе по имени сервиса "db",
+      # а не по localhost или 127.0.0.1. Порт остается стандартным 5432 (внутренним).
+      - DATABASE_URL=postgresql+psycopg2://mts_user:mts_password@db:5432/mts_hackathon
+    volumes:
+      # Пробрасываем папку uploads, чтобы картинки сохранялись у тебя на диске
+      - ./uploads:/app/uploads
+      - ./weights:/app/weights:ro
+
+volumes:
+  postgres_data:

@@ -1,0 +1,15 @@
+{
+  "split": "test",
+  "image_size": 384,
+  "images": 10,
+  "threshold": 0.3,
+  "detection_f1_at_iou50": 0.3448275862068966,
+  "tp": 5,
+  "fp": 7,
+  "fn": 12,
+  "state_targets": 10,
+  "state_correct": 1,
+  "state_wrong": 1,
+  "state_review": 2,
+  "state_missed": 6
+}

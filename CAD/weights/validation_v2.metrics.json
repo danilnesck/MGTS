@@ -1,0 +1,83 @@
+{
+  "split": "val",
+  "images": 8,
+  "image_size": 384,
+  "view": "full",
+  "detector_weights": "detector_v2.pt",
+  "detector": {
+    "mAP50": 0.6060189393939395,
+    "mAP50-95": 0.33508522727272727,
+    "by_class": {
+      "tksh": 0.6970378787878789,
+      "rsh": 0.5149999999999999
+    },
+    "threshold": 0.25,
+    "tp": 6,
+    "fp": 4,
+    "fn": 7,
+    "precision_at_iou50": 0.6,
+    "recall_at_iou50": 0.46153846153846156,
+    "f1_at_iou50": 0.5217391304347826
+  },
+  "cascade": {
+    "correct": 5,
+    "wrong": 0,
+    "review": 0,
+    "missed": 3,
+    "false_normal": 0
+  },
+  "mean_inference_ms": 39.2,
+  "device": "cpu",
+  "classifier_weights": "classifier_v2.pt",
+  "classifier_crop_context": 0.18,
+  "classifier_on_reference_crops": {
+    "samples": 8,
+    "classes": [
+      "coating_damage",
+      "mechanical_damage",
+      "normal"
+    ],
+    "confusion_matrix": [
+      [
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        3
+      ]
+    ],
+    "by_class": {
+      "coating_damage": {
+        "support": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "mechanical_damage": {
+        "support": 3,
+        "precision": 1.0,
+        "recall": 0.6666666666666666,
+        "f1": 0.8
+      },
+      "normal": {
+        "support": 3,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.8571428571428571
+      }
+    },
+    "macro_f1": 0.8857142857142857,
+    "accuracy": 0.875,
+    "threshold": 0.55,
+    "accepted": 8,
+    "correct_accepted": 7
+  }
+}
