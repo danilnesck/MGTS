@@ -1,21 +1,20 @@
-from pydantic import BaseModel
 from datetime import datetime
-from typing import List, Optional
+from pydantic import BaseModel, ConfigDict, Field
 
-# Ответ от ML-модели
 class DetectedObject(BaseModel):
     object_type: str
     status: str
-    confidence: float
-    bbox: List[float]
+    confidence: float = Field(ge=0, le=1)
+    bbox: list[float] = Field(min_length=4, max_length=4)
     needs_repair: bool
 
-# Ответ API
+class DetectionResponse(DetectedObject):
+    id: int
+
 class InspectionResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     image_filename: str
-    objects_detected: List[DetectedObject]
     created_at: datetime
-
-    class Config:
-        from_attributes = True
+    detections: list[DetectionResponse]
